@@ -37,4 +37,10 @@ new_seq
 firthir <- new_seq[c("first", "third")]
 firthir
 
+#5. Create a sequence x from -3:2
+extreto 
+
+#a. Modify 2nd element and change it to 0;
+
+
 
