@@ -140,3 +140,4 @@ VegeAte <- list("Potato","Carrot","BellPepper","Chili","Brocoli","BokChoy","Arti
 RemoVeg <- VegeAte [c(-5, -10, -15)]
 RemoVeg
 
+
