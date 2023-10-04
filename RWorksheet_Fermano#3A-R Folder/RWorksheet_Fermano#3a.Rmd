@@ -1,0 +1,60 @@
+---
+title: "RWorksheet_Fermano#3a.Rmd"
+output: pdf_document
+date: "2023-10-04"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+#1. There is a built-in vector LETTERS contains the uppercase letters of the alphabet and letters which contains the lowercase letters of the alphabet.
+Alpine1 <- LETTERS[1:26]
+Alpine1
+Alpine2 <- letters[1:26]
+Alpine2
+
+#1a You need to produce a vector that contains the first 11 letters.
+Oneeleven1 <- Alpine1[1:11]
+Oneeleven2 <- Alpine2[1:11]
+Oneeleven1
+Oneeleven2
+
+#1b Produce a vector that contains the odd numbered letters.Produce a vector that contains the odd numbered letters.
+Oddis1 <- Alpine1[c(TRUE, FALSE)]
+Oddis2 <- Alpine2[c(TRUE, FALSE)]
+
+#1c Produce a vector that contains the vowels.
+Vowvec1 <- Alpine1[c(1,5,9,15,21)]
+Vowvec2 <- Alpine2[c(1,5,9,15,21)]
+
+#1d Produce a vector that contains the last 5 lowercase letters.
+Veclow1 <- Alpine2[c(22:26)]
+
+#1e Produce a vector that contains letters between 15 to 24 letters in lowercase.
+Veclow2 <- Alpine2[c(15:24)]
+
+
+
+
