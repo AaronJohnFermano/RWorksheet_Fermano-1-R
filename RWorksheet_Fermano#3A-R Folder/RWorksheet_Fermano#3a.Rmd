@@ -55,6 +55,100 @@ Veclow1 <- Alpine2[c(22:26)]
 #1e Produce a vector that contains letters between 15 to 24 letters in lowercase.
 Veclow2 <- Alpine2[c(15:24)]
 
+#2Create a vector(not a dataframe) with the average temperatures in April for Tugue-garao City, Manila, Iloilo City, Tacloban, Samal Island, and Davao City. The average temperatures in Celcius are 42, 39, 34, 34, 30, and 27 degrees.
+
+#2a. What is the R code and its result for creating a character vector for the city/town of Tuguegarao City, Manila, Iloilo City, Tacloban,Samal Island, and Davao City? Name the object as city. The names should follow the same order as in the instruction.
+Namcit <- c("Tuguegarao City", "Manila", "Iloilo City", "Tacloban", "Samal Island", "Davao City")
+Namcit
+
+#2b. The average temperatures in Celcius are 42, 39, 34, 34, 30, and 27 degrees.Name the object as temp. Write the R code and its output. Numbers should also follow what is in the instruction.
+Avetem <- c(42, 39, 34, 34, 30, 27)
+Avetem
+
+#2c. Create a dataframe to combine the city and the temp by using ‘data.frame(). What the R code and its result?
+comcit <- data.frame(City = Namcit, Temperature = Avetem)
+comcit
+
+#2d. Associate the dataframe you have created in 2.(c) by naming the columns using the names() function. Change the column names by using names() function as City andTemperature. What is the R code and its result?
+names(comcit) <- c("City", "Temperature")
+View(comcit)
+
+#2e. Print the structure by using str() function. Describe the output.
+str(comcit)
+
+#2f. From the answer in d, what is the content of row 3 and row 4 What is its R code and its output?
+rowtefor <- comcit[3:4, ]
+rowtefor
+
+#2g. From the answer in d, display the city with highest temperature and the city with the lowest temperature. What is its R code and its output?
+higtem <- comcit[comcit$Temperature == max(comcit$Temperature), ]
+higtem
+
+lowtem <- comcit[comcit$Temperature == min(comcit$Temperature), ]
+lowtem
 
 
+##USING MATRICES##
+
+#3. An array contains 1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1
+
+#3a. Create an array for the above numeric values. Each values will be repeated twicea What will be the R code if you are to create three-dimensional array with 4 columns and 2 rows. What will be its output?
+arrnum <- matrix(c(1:8,11:14), ncol = 4, nrow = 3)
+arrnum
+
+#3b. How many dimensions do your array have?
+dimarr <- arrnum * 2
+dimarr
+
+#3c. Name the rows as lowercase letters and columns as uppercase letters starting from the A. The array names should be “1st-Dimensional Array”, “2nd-Dimensional Array”, and “3rd-Dimensional Array”. What will be the R codes and its output?
+rowerca <- arrnum[2, ]
+rowerca
+
+#3d
+sbst1_matrix <- arrnum[1:2, 3:4]
+sbst1_matrix
+
+#3e
+sbst_row <- arrnum[3, 2:3]
+sbst_row
+
+#3f
+col_4 <- arrnum[, 4]
+col_4
+
+#3g
+rownames(arrnum) <- c("isa", "dalawa", "tatlo")
+colnames(arrnum) <- c("uno", "dos", "tres", "quatro")
+
+arrnum
+
+#3h
+newmat <- arrnum
+dim(newmat) <- c(6, 2)
+
+newmat
+
+##USING ARRAYS##
+
+#4. An array contains 1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1
+
+val <- c(1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1)
+val
+
+#4a.
+myarr <- array(val, dim = c(2, 4, 3))
+myarr
+
+#4b.
+dim(myarr)
+
+#4c.
+colnames(myarr) <- c("A","B","C","D")
+myarr
+
+rownames(myarr) <- c("a","b")
+myarr
+
+dimnames(myarr)[[3]] <- c("1st-Dimensional Array", "2nd-Dimensional Array", "3rd-Dimensional Array")
+myarr
 
