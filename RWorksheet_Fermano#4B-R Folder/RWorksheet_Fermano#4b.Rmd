@@ -1,0 +1,47 @@
+---
+title: "RWorksheet_Fermano#4b"
+output: pdf_document
+date: "2023-11-08"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#1. Using the for loop, create an R script that will display a 5x5 matrix as shown in Figure 1. It must contain vectorA = [1,2,3,4,5] and a 5 x 5 zero matrix.
+vectorA = c(1,2,3,4,5)
+matrixA <-matrix (0, nrow = 5, ncol =5)
+
+for (i in 1:5){
+  for (j in 1:5){
+      matrixA[i,j] <- abs(i-j)+ vectorA[j]
+  }
+}
+
+print(matrixA)    
+    
+    
+#2. Print the string "*" using for() function. The output should be the same as shown in Figure.
+vectorA <- 1:5
+matrixA <- matrix(0, nrow=5, ncol=5)
+
+for (i in 1:nrow(matrixA)) {
+  for (j in 1:ncol(matrixA)) {
+    matrixA[i,j] <- abs(vectorA[i]-vectorA[j])
+    cat(matrixA[i,j], "\t")
+  }
+  cat("\n")
+}
+
+for(k in 1:5) {
+  cat("*")
+}
+
+#3. Get an input from the user to print the Fibonacci sequence starting from the 1st input up to 500. Use repeat and break statements. Write the R Scripts and its output.
+             
+
+
+
+
+
+
