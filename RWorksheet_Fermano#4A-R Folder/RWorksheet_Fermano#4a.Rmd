@@ -3,7 +3,12 @@ title: "Rworksheet_Fermano#4a"
 output: pdf_document
 date: "2023-10-25"
 ---
-```{1}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
 #1 The table below shows the data about shoe size and height. Create a data frame.
 
 Household_data <- data.frame(
@@ -12,8 +17,9 @@ Height = c(66.0, 68.0, 64.5, 65.0, 70.0, 64.0, 70.0, 71.0, 72.0, 64.0, 74.2, 67.
 Gender = c("F", "F", "F", "F", "M", "F","F", "F", "M", "F", "M", "F", "M", "M", "M", "M", "F", "F", "M", "F", "F", "M", "M", "F", "M", "M", "M", "M")
 )
 Household_data
-
-
+write.csv(Household_data,file = "Shoe_size")
+```
+```{r}
 #1a. Describe the data.
 
 #1b. Create a subset by males and females with their corresponding shoe size and height. What its result? Show the R scripts.
@@ -22,7 +28,9 @@ c(Shoe_size, Height))
 
 subfema <- subset(Household_data, Gender == "F", select =
 c(Shoe_size, Height))
+```
 
+```{r}
 #1c. Find the mean of shoe size and height of the respondents. Write the R scripts and its result.
 meansiz <- mean(Household_data$Shoe_size)
 meansiz
@@ -32,8 +40,10 @@ meanhei
 
 #1d. Is there a relationship between shoe size and height? Why?
 ```
-```{2}
+
+```{r}
 #2.Construct character vector months to a factor with factor() and assign the result to factor_months_vector. Print out factor_months_vector and assert that R prints out the factor levels below the actual values.
+
 nammonths <- c("March","April","January","November","January",
 "September","October","September","November","August",
 "January","November","November","February","May","August","July","December","August","August","September","November","February","April")
@@ -42,11 +52,13 @@ nammonths
 factor_nammonths <- factor(nammonths)
 factor_nammonths
 ```
-```{3}
+
+```{r}
 #3. Then check the summary() of the months_vector and factor_months_vector. Interpret the results of both vectors. Are they both equally useful in this case? 
 summary(factor_nammonths)
 ```
-```{4}
+
+```{r}
 #4 Apply the factor function with required order of the level.new_order_data <- factor(factor_data,levels = c("East","West","North"))print(new_order_data)
 Direction <- c("East","West","North")
 Frequency <- c(1,4,3)
@@ -63,16 +75,20 @@ print(new_order_data)
 new_order_data2 <- factor(factfreq,levels = c(1,4,3))
 print(new_order_data2)
 ```
-```{5}
+
+```{r}
 #5. Enter the data below in Excel with file name = import_march.csv
 
 #5a. Import the excel file into the Environment Pane using read.table() function. Write the code. (Environment)
 Excdata <- read.csv("import_march.csv")
+```
 
+```{r}
 #5b View the dataset. Write the R scripts and its result.
 Excdata
 ```
-```{6}
+
+```{r}
 #6 Full Search
 number_input <- readline(prompt="Enter number from 1 to 50:
                          ")
@@ -82,8 +98,9 @@ if(number_input>50){
   print("TRUE")
 }
 ```
-```{7}
-#7Change
+
+```{r}
+#7 Change
 minimumprice <- function(price) {
   
   minprice <- price %/% 50
@@ -92,7 +109,8 @@ minimumprice <- function(price) {
 
 minimumprice(90)
 ```
-```{8}
+
+```{r}
 #8. The following is each student’s math score for one semester. Based on this, answer the following questions.
 
 #8a Create a data frame
@@ -105,7 +123,9 @@ mathgrades <- data.frame(
     Grade4 = c(100,90,85,90)
 )
 mathgrades
+```
 
+```{r}
 #8b Without using the rowMean function, output the average score of students whose average math score over 90 points during the semester. write R code and its output.
 
 mathgrades$Average <- (mathgrades$Grade1 + mathgrades$Grade2 + mathgrades$Grade3 + mathgrades$Grade4) / 4
@@ -117,24 +137,28 @@ if(nrow(highgrades)>0){
 }else{
   print("there is no student that got 90 average grades")
 }
+```
 
+```{r}
 #8c Without using the mean function, output as follows for the tests in which the averagescore was less than 80 out of 4 tests.
 
  average_scores <- colMeans(mathgrades[, -1]) 
 
 if (average_scores[1] < 80) {
-    print("The 1st test was difficult.\n")
+    print("The 1st test was difficult.")
 }else if (average_scores[2] < 80) {
-    print("The 2nd test was difficult.\n")
+    print("The 2nd test was difficult.")
 }else if (average_scores[3] < 80) {
-    print("The 3rd test was difficult.\n")
+    print("The 3rd test was difficult.")
 }else if (average_scores[4] < 80) {
-    print("The 4th test was difficult.\n")
+    print("The 4th test was difficult.")
 }else{
   print("No test that students find it difficult")
 }
  
- 
+```
+
+```{r}
 #8d Without using the max function, output as follows for students whose highest score for a semester exceeds 90 points.
 
 # Annie
