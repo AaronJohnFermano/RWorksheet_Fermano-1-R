@@ -178,6 +178,7 @@ plot(iris$Sepal.Length, iris$Sepal.Width,
      ylab = "Sepal Width")
 
 legend("topright",legend = levels(iris$Species),col= colors, pch = symbols, title = "Species") 
+  
 
 #6e
 #by factoring the species, it will be represents as a categories in R. 
