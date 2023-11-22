@@ -87,15 +87,15 @@ barplot(GenderMF,
 
 ```{r}
 #5 The monthly income of Dela Cruz family was spent on the following:
-familyincome <- c(60,10,5,25)
+cruzincome <- c(60,10,5,25)
 
-pie(familyincome,labels = paste0(familyincome,"%"),
-    main = "Dela Cruz Family Expenses", col = rainbow(length(familyincome)))
+pie(cruzincome,labels = paste0(cruzincome,"%"),
+    main = "Dela Cruz Family Expenses", col = rainbow(length(cruzincome)))
 
 #a. Create a piechart that will include labels in percentage.Add some colors and title of the chart. Write the R scripts and show its output.
 
 legend("topleft", legend = c("Food","Electricity", "Savings","Miscellaneous"),
-       fill = rainbow(length(familyincome)))
+       fill = rainbow(length(cruzincome)))
 
 ```
 
@@ -247,8 +247,11 @@ alexaplot <- barplot(var_TOTAL$n,
                      cex.names = 0.5,
                      las = 2)
 
-knitr::include_graphics("file path")
 
+png("alexaplot.png")
+dev.off()
+
+knitr::include_graphics("/cloud/project/RWorksheet_Fermano#4B-R Folder/alexaplot.png")
 
 
 ```
@@ -256,35 +259,37 @@ knitr::include_graphics("file path")
 ```{r}
 #7d. Create a barplot() for the black and white variations. Plot it in 1 frame, side by side. Complete the details of the chart.
 
-blackvariation <- var_TOTAL[var_TOTAL$`alexa$variation`%in%c("Black", "BlackPlus" , "BlackShow" ,"BlackSpot" , "BlackDot"),]
-
-whitevariation <- var_TOTAL[var_TOTAL$`alexa$variation`%in%c("White", "WhiteDot", "WhitePlus", "WhiteShow", "WhiteSpot"),]
+library(RColorBrewer)
 
 par(mfrow = c(1,2))
 
-blackvariation
 
-blackvarplot <- barplot(height = blackvariation$n,
-                        names.arg = blackvariation$`alexa$variation`,
-                        col = c("black"),
-                        xlab = "Variation",
-                        ylab = "Count",
-                        border = "black",
+blavarplo <- barplot(height = c(261,270,265,241,516), 
+                        names.arg = c("Black","BlackPlus","BlackShow","BlackSpot","BlackDot"), main = "Black Variations",
+                        col = 1:5,
                         space = 0.5,
-                        cex.names = 0.4)
-
-
-whitevarplot <- barplot(height = whitevariation$n,
-                        names.arg = blackvariation$`alexa$variation`,
-                        col = "white",
                         xlab = "Variation",
-                        ylab = "Count",
-                        border = "black",
+                        ylab = "Count")
+
+png("blavarplo.png")
+dev.off()
+
+knitr::include_graphics("/cloud/project/RWorksheet_Fermano#4B-R Folder/blavarplo.png")
+
+whitevarplot <- barplot(height = c(91,184,78,85,109), 
+                        names.arg = c("White", "WhiteDot", "WhitePlus", "WhiteShow", "WhiteSpot"),
+                        main = "White Variations",
                         space = 0.5,
-                        cex.names = 0.4)
+                        col = 6:10,
+                        xlab = "Variation",
+                        ylab = "Count",)
 
-knitr::include_graphics("file path")
 
+
+png("whitevarplot.png")
+dev.off()
+
+knitr::include_graphics("/cloud/project/RWorksheet_Fermano#4B-R Folder/whivarplo.png")
 
 ```
 
