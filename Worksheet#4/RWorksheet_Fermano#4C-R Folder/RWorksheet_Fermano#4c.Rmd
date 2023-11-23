@@ -1,0 +1,207 @@
+---
+title: "RWorksheet_Fermano#4c.Rmd"
+author: "Aaron John Fermano BSIT2-C"
+date: "2023-11-23"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#1.Use the dataset mpg
+
+library(readr)
+datadf <- read_csv("mpg.csv")
+View(mpg)
+
+```
+
+```{r}
+#1b. Which variables from mpg dataset are categorical?
+
+categorical_vars <- c("manufacturer", "model", "trans", "drv", "fl", "class")
+categorical_vars
+```
+
+```{r}
+#1c. Which are continuous variables?
+continuous_vars <- c("displ", "year", "cyl", "cty", "hwy")
+continuous_vars
+```
+```{r}
+#2. Which manufacturer has the most models in this data set? Which model has the most variations? Show your answer.
+
+#2a. Group the manufacturers and find the unique models. Show your codes and result.
+
+library(dplyr)
+
+manufacturer_models <- mpg %>%
+  group_by(manufacturer) %>%
+  summarise(num_models = n_distinct(model)) %>%
+  arrange(desc(num_models))
+
+manufacturer_models[1, ]
+
+```
+```{r}
+#2b. Graph the result by using plot() and ggplot(). Write the codes and its result
+library(ggplot2)
+
+ggplot(manufacturer_models, aes(x = manufacturer, y = num_models)) +
+  geom_bar(stat = "identity", fill = "pink") +
+  labs(title = "Number of Models by Manufacturer", x = "Manufacturer", y = "Number of Models") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r}
+#2.
+#2a. What does ggplot(mpg, aes(model, manufacturer)) + geom_point() show?
+
+#This ggplot command creates a scatter plot where each point represents a car model, positioned along the x-axis by the model name and along the y-axis by the manufacturer.
+
+#2b. Is it useful? If not, how could you modify the data to make it more informative?
+
+#The plot may be useful for visualizing the distribution of models across manufacturers, but it could be crowded and hard to interpret if there are many models. 
+```
+
+```{r}
+#3.
+top_20_data <- head(mpg[order(mpg$year, decreasing = TRUE), ], 20)
+ggplot(top_20_data, aes(x = year, y = model)) +
+  geom_point() +
+  labs(title = "Top 20 Observations: Model vs Year", x = "Year", y = "Model") + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+```{r}
+#4. Using the pipe (%>%), group the model and get the number of cars per model. Show codes and its result
+
+library(dplyr)
+
+cars_per_model <- mpg %>%
+  group_by(model) %>%
+  summarise(num_cars = n())
+
+  print(cars_per_model)
+```
+```{r}
+#4a. Plot using geom_bar() using the top 20 observations only. The graphs shoudl have a title, labels and colors. Show code and results.
+
+top_20_data <- head(mpg[order(mpg$year, decreasing = TRUE), ], 20)
+
+ggplot(top_20_data, aes(x = model)) +
+  geom_bar(fill = "pink", color = "black") +
+  labs(title = "Top 20 Observations: Number of Cars per Model",
+       x = "Model", y = "Number of Cars") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r}
+#4b.  Plot using the geom_bar() + coord_flip() just like what is shown below. Show codes and its result.
+
+ggplot(top_20_data, aes(y = model)) +
+  geom_bar(fill = "pink", color = "black") +
+  labs(title = "Top 20 Observations: Number of Cars per Model",
+       x = "Number of Cars", y = "Model") +
+  coord_flip() +
+  theme(axis.text.y = element_text(angle = 45, hjust = 1))
+```
+
+```{r}
+#5. Plot the relationship between cyl - number of cylinders and displ - engine displacement using geom_point with aesthetic color = engine displacement. Title should be “Relationship between No. of Cylinders and Engine Displacement”.
+
+
+ggplot(mpg, aes(x = cyl, y = displ, color = displ)) +
+  geom_point() +
+  labs(title = "Relationship between No. of Cylinders and Engine Displacement",
+       x = "Number of Cylinders", y = "Engine Displacement") +
+  scale_color_gradient(low = "pink", high = "hotpink") +
+  theme_minimal()
+
+#5a. How would you describe its relationship? Show the codes and its result. The plot shows that there is a positive relationship between the number of cylinders and engine displacement. 
+```
+```{r}
+#5a. How would you describe its relationship? Show the codes and its result.
+
+ggplot(mpg, aes(x = displ, y = hwy, color = cyl)) +
+  geom_point() +
+  labs(title = "Relationship between Engine Displacement and Highway MPG",
+       x = "Engine Displacement", y = "Highway MPG") +
+  scale_color_gradient(low = "pink", high = "hotpink") +
+  theme_minimal()
+```
+```{r}
+#6. Import the traffic.csv onto your R environment.
+traffic <- read.csv("traffic.csv")
+```
+
+```{r}
+#6a. How many numbers of observation does it have? What are the variables of the traffic dataset the Show your answer.
+
+num_observations <- nrow(traffic)
+
+variables <- names(traffic)
+
+cat("Number of observations:", num_observations, "\n")
+cat("Variables of the traffic dataset:", variables, "\n")
+```
+
+```{r}
+#B.
+junctions <- subset(traffic, Type == "Junction")
+print(junctions)
+```
+
+```{r}
+library(ggplot2)
+
+ggplot(junctions, aes(x = Time, y = Count, group = Junction, color = Junction)) +
+ geom_line() +
+ labs(title = "Junctions Traffic", x = "Time", y = "Count") +
+ theme_minimal()
+```
+
+```{r}
+#7
+#A.
+library(openxlsx)
+
+alexa_file <- read.xlsx("alexa_file.xlsx")
+
+print(dim(alexa_file))
+```
+```{r}
+#B.
+library(dplyr)
+
+alexa_file %>%
+ group_by(Variation) %>%
+ summarise(Total = sum(NumberOfVerifiedReviews))
+```
+
+```{r}
+#C.
+ggplot(alexa_file, aes(x = Date, y = NumberOfVerifiedReviews, group = Variation, color = Variation)) +
+ geom_line() +
+ labs(title = "Variations", x = "Date", y = "NumberOfVerifiedReviews") +
+ theme_minimal()
+```
+```{r}
+#D.
+ggplot(alexa_file, aes(x = Date, y = NumberOfVerifiedReviews, group = 1)) +
+ geom_line() +
+ labs(title = "Verified Reviews", x = "Date", y = "NumberOfVerifiedReviews") +
+ theme_minimal()
+```
+```{r}
+#E.
+alexa_file %>%
+ group_by(Variation) %>%
+ summarise(AvgRating = mean(Rating)) %>%
+ arrange(desc(AvgRating))
+
+ggplot(alexa_file, aes(x = Rating, y = NumberOfVerifiedReviews, group = Variation, color = Variation)) +
+ geom_line() +
+ labs(title = "Variations and Ratings", x = "Rating", y = "NumberOfVerifiedReviews") +
+ theme_minimal()
+```
