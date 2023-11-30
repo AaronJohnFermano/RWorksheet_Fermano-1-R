@@ -159,7 +159,6 @@ junction_traffic <- c(1,2,3,4)
 
 junction_subset <- trafficdata[trafficdata$Junction %in% junction_traffic, ]
 
-junction_subset
 ```
 
 ```{r}
