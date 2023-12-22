@@ -1,0 +1,134 @@
+---
+title: "RWorksheet#6"
+author: "Aaron John Fermano BSIT2-C"
+date: "2023-12-21"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Certainly! Here's the consolidated code with changed variable names:
+
+```{r}
+# 1. Create a data frame for student scores
+New_Student_data <- data.frame(
+  ID = c(1:10),
+  Initial_score = c(55,54,47,57,51,61,57,54,63,58),
+  Final_score = c(61,60,56,63,56,63,59,56,62,61)
+)
+New_Student_data
+names(New_Student_data) <- c("ID","Initial_score","Final_score")
+```
+```{r}
+# 1a. Descriptive statistics for student scores
+install.packages("Hmisc")
+install.packages("pastecs")
+library(Hmisc)
+library(pastecs)
+describe(New_Student_data)
+stat.desc(New_Student_data)
+
+```
+
+```{r}
+# 2. Convert fertilizer levels to an ordered factor
+new_fertilizer_levels <- c(10,10,10, 20,20,50,10,20,10,50,20,50,20,10)
+new_ordered_levels <- ordered(new_fertilizer_levels, levels = c(10,20,50))
+new_ordered_levels
+```
+
+```{r}
+# 3. Represent exercise levels in R
+new_exercise_levels <- c("l", "n", "n", "i", "l", "l", "n", "n", "i", "l")
+new_factor_exercise <- factor(new_exercise_levels, levels = c("n", "l", "i"))
+new_factor_exercise
+```
+
+```{r}
+# 4. Sample of tax accountants from states and territories
+new_states <- c("tas", "sa", "qld", "nsw", "nsw", "nt", "wa", "wa", "qld",
+"vic", "nsw", "vic", "qld", "qld", "sa", "tas", "sa", "nt",
+"wa", "vic", "qld", "nsw", "nsw", "wa", "sa", "act", "nsw",
+"vic", "vic", "act")
+new_factor_state <- factor(new_states, levels = c("act", "nsw", "nt", "qld", "sa", "tas", "vic", "wa"))
+new_factor_state
+```
+
+```{r}
+# 5. Calculate means of incomes for each state
+new_incomes <- c(60, 49, 40, 61, 64, 60, 59, 54,
+62, 69, 70, 42, 56, 61, 61, 61, 58, 51, 48,
+65, 49, 49, 41, 48, 52, 46, 59, 46, 58, 43)
+new_incmeans <- tapply(new_incomes, new_factor_state, mean)
+new_incmeans
+```
+
+```{r}
+# 6. Calculate standard errors of state income means
+new_stdError <- function(x) sqrt(var(x)/length(x))
+new_incster <- tapply(new_incomes, new_factor_state, new_stdError)
+new_incster
+```
+
+```{r}
+# 7. Titanic data analysis
+install.packages("titanic")
+library(titanic)
+data("titanic_train")
+new_survived <- subset(titanic_train, Survived == 1)
+new_not_survived <- subset(titanic_train, Survived == 0)
+head(new_survived)
+head(new_not_survived)
+```
+
+```{r}
+# 8. Breast cancer data analysis
+
+new_breastcancer_data <- read.csv("breastcancer_wisconsin.csv")
+str(new_breastcancer_data)
+head(new_breastcancer_data)
+summary(new_breastcancer_data)
+```
+
+```{r}
+# 8d. Breast cancer data statistics
+
+install.packages("psych")
+library(psych)
+
+new_clump_thickness <- new_breastcancer_data$ClumpThickness
+new_marginal_adhesion <- new_breastcancer_data$MarginalAdhesion
+new_bare_nuclei <- new_breastcancer_data$BareNuclei
+new_bland_chromatin <- new_breastcancer_data$BlandChromatin
+new_uniformity_cell_shape <- new_breastcancer_data$UniformityCellShape
+new_SE_clumpthickness <- sd(new_clump_thickness) / sqrt(length(new_clump_thickness))
+new_CV_marginaladhesion <- sd(new_marginal_adhesion) / mean(new_marginal_adhesion)
+new_nullval_barenuclei <- sum(is.na(new_bare_nuclei))
+new_mean_blandchromatin <- mean(new_breastcancer_data$bland_chromatin)
+new_sd_blandchromatin <- sd(new_breastcancer_data$bland_chromatin)
+new_ci_uniformitycellshape <- tryCatch(
+  t.test(new_breastcancer_data$`uniformity_cell_shape`)$conf.int,
+  error = function(e) NULL
+)
+new_ci_uniformitycellshape
+```
+
+```{r}
+# 9. Export the data abalone to Microsoft Excel
+
+install.packages("AppliedPredictiveModeling")
+library(AppliedPredictiveModeling)
+
+data("abalone")
+
+install.packages("openxlsx")
+library(openxlsx)
+write.xlsx(abalone, file = "abalone.xlsx")
+head(abalone)
+summary(abalone)
+```
